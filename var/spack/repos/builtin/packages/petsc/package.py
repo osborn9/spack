@@ -186,6 +186,7 @@ class Petsc(Package, CudaPackage, ROCmPackage):
     conflicts('+superlu-dist', when='~mpi', msg=mpi_msg)
     conflicts('+trilinos', when='~mpi', msg=mpi_msg)
     conflicts('+kokkos', when='~mpi', msg=mpi_msg)
+    conflicts('^openmpi~cuda', when='+cuda')  # +cuda requires CUDA enabled OpenMPI
 
     # older versions of petsc did not support mumps when +int64
     conflicts('+mumps', when='@:3.12+int64')
@@ -317,6 +318,8 @@ class Petsc(Package, CudaPackage, ROCmPackage):
     depends_on('hwloc', when='+hwloc')
     depends_on('kokkos', when='+kokkos')
     depends_on('kokkos-kernels', when='+kokkos')
+    depends_on('kokkos+cuda+wrapper+cuda_lambda', when='+kokkos +cuda')
+    depends_on('kokkos-kernels+cuda', when='+kokkos +cuda')
 
     # Using the following tarballs
     # * petsc-3.12 (and older) - includes docs
@@ -506,6 +509,10 @@ class Petsc(Package, CudaPackage, ROCmPackage):
         # using download instead
         if '+hpddm' in spec:
             options.append('--download-hpddm')
+        # revert changes by kokkos-nvcc-wrapper
+        env['MPICH_CXX'] = env['CXX']
+        env['OMPI_CXX'] = env['CXX']
+        env['MPICXX_CXX']= env['CXX']
 
         python('configure', '--prefix=%s' % prefix, *options)
 
