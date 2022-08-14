@@ -14,6 +14,7 @@ class PyPyomo(PythonPackage):
     homepage = "https://github.com/Pyomo/pyomo"
     url      = "https://github.com/Pyomo/pyomo/archive/5.6.6.tar.gz"
 
+    version('6.4.1', sha256='a636a3a1c8314b8be85899cb6fac5d6a9a78fc75c6d58b74d3ec106ae5ed8f59')
     version('5.6.6', sha256='9330956b9fb244351ce76aaaf88688b5bdd03eebb122020cbee7b46e198a4110')
 
     depends_on('python@2.7:2.9,3.4:', type=('build', 'run'))
