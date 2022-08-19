@@ -26,9 +26,10 @@ class PyPyomo(PythonPackage):
     depends_on('py-pyutilib@5.7.1:', type=('build', 'run'))
     depends_on('py-ply', type=('build', 'run'))
     depends_on('py-six@1.4:', type=('build', 'run'))
+    depends_on('ipopt', type=('build', 'run'))
 
-    phases = ['configure', 'install']
+    #phases = ['configure', 'install']
 
-    def configure(self, spec, prefix):
-        Executable('pip install idaes_pse')
-        Executable('idaes get-extensions')
+    #def configure(self, spec, prefix):
+    #    Executable('pip install idaes_pse')
+    #    Executable('idaes get-extensions')
