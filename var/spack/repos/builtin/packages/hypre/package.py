@@ -189,7 +189,6 @@ class Hypre(AutotoolsPackage, CudaPackage, ROCmPackage):
             configure_args.append("--without-superlu")
             # MLI and FEI do not build without superlu on Linux
             configure_args.append("--without-mli")
-            configure_args.append("--without-fei")
 
         if "+superlu-dist" in spec:
             configure_args.append(
